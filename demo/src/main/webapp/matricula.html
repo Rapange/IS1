@@ -1,0 +1,60 @@
+<html>
+   <head>
+      <title>Alumnos</title>
+
+      <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+      <script type="text/javascript">
+         function alumnoController($scope,$http) {
+             $http.get("alumnos").success( function(response) {
+                 $scope.alumnos = response;
+              });
+             $http.get("cursos").success( function(response) {
+                 $scope.cursos = response;
+              });
+             $http.post("cursos", '{"codigo": "02", "nombre": "IPOO II"}').success( function(response) {
+              });
+             $scope.ButtonClick = function(){
+            	 var Matricula = {
+        				 alumno_id: $scope.alumno_id,
+        				 curso_id: $scope.curso_id
+        		 };
+            	 $http.post("matriculas", Matricula).success( function(response) {
+                 });
+        		 $scope.Message = $scope.alumno_id
+        		 /*$http.get("matriculas").success( function(response) {
+                     $scope.matriculas = response;
+                  });*/
+        	 } 
+         }
+         /*var app = angular.module('MyApp', [])
+         app.controller('MyController', function($scope){
+        	 $scope.ButtonClick = function(){
+        		 $scope.Message = $scope.nombres
+        	 } 
+         })*/
+      </script>
+   </head>
+   <body>
+      <h2>Proceso de matr&iacute;culas</h2>
+      	<div ng-app="" ng-controller = "alumnoController">
+      	<fieldset>
+      		ID del alumno: 
+	      	<input type='text'
+	      		   name = 'alumno_id'
+	      		   ng-model ='alumno_id' />
+	      	<br><br>
+	      	C&oacute;digo del curso: 
+	      	<input type='text'
+	      		   name = 'curso_id'
+	      		   ng-model = 'curso_id' />
+	   		<br><br>
+	   		<input type="button"
+	   			   value = "Matricular"
+	   			   ng-click="ButtonClick()"/>
+	   		<br><br>
+	   		<span ng-bind="Message"></span>
+   		</fieldset>
+   		</div>
+   </body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+   <head>
+      <title>Alumnos</title>
+
+      <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+      <script type="text/javascript">
+         function alumnoController($scope,$http) {
+        	 $http.get("matriculas").success( function(response) {
+                 $scope.matriculas = response;
+              });
+         }
+      </script>
+   </head>
+   <body>
+      <h2>Matriculados</h2>
+      	<div ng-app="" ng-controller = "alumnoController">
+	      	<table>
+	            <tr>
+	               <th>ID de alumno</th>
+	               <th>C&oacute;digo de curso</th>
+	            </tr>
+	            <tr ng-repeat = "matricula in matriculas">
+	               <td>{{ matricula.alumno_id }}</td>
+	               <td>{{ matricula.curso_id }}</td>
+	            </tr>
+	         </table>
+   		</div>
+   </body>
+</html>
